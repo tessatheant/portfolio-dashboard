@@ -78,26 +78,18 @@
   .stock-ticker { font-size: 11px; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.2rem; }
   .stock-name { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 300; line-height: 1.2; }
   .stock-sector { font-size: 10px; color: var(--text-muted); margin-top: 0.2rem; letter-spacing: 0.06em; }
+  .stock-badge-row { display: flex; gap: 0.4rem; align-items: flex-start; flex-direction: column; }
   .stock-exchange { font-size: 10px; color: var(--text-muted); border: 1px solid var(--border); padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
+  .stock-note { font-size: 9px; color: var(--text-muted); opacity: 0.7; text-align: right; }
 
   .chart-controls { display: flex; padding: 0.45rem 0.8rem; border-bottom: 1px solid var(--border); background: var(--surface2); gap: 2px; }
   .tf-btn { background: transparent; border: none; color: var(--text-muted); padding: 3px 9px; cursor: pointer; font-family: 'DM Mono', monospace; font-size: 11px; border-radius: 3px; transition: all 0.15s; }
   .tf-btn:hover { color: var(--text); background: var(--border); }
   .tf-btn.active { color: var(--bg); background: var(--accent); }
 
-  /* Chart container — must have explicit height for TradingView autosize to work */
-  .chart-wrap {
-    height: 320px;
-    width: 100%;
-    position: relative;
-    background: #141716;
-  }
+  .chart-wrap { height: 320px; width: 100%; position: relative; background: #141716; }
   .chart-wrap .tradingview-widget-container,
-  .chart-wrap .tradingview-widget-container > div:first-child {
-    height: 100% !important;
-    width: 100% !important;
-  }
-  /* Hide the TV copyright bar to save space */
+  .chart-wrap .tradingview-widget-container > div:first-child { height: 100% !important; width: 100% !important; }
   .chart-wrap .tradingview-widget-copyright { display: none !important; }
 
   .news-section { border-top: 1px solid var(--border); padding: 0.8rem 1.2rem; background: var(--bg); }
@@ -143,21 +135,41 @@
 
 <footer>
   Charts via TradingView &nbsp;·&nbsp; Rates via frankfurter.app &nbsp;·&nbsp; News via Yahoo Finance RSS &nbsp;·&nbsp; Rates auto-refresh every 60s
+  <br><span style="opacity:0.5;font-size:10px">Non-US stocks shown as OTC ADR equivalents (HALMY, HXGBY, VWDRY, FUJIY, MKTAY, SBGSY) due to exchange data restrictions on free embeds</span>
 </footer>
 
 <script>
 // ── CONFIG ──────────────────────────────────────────────────────────────────
+//
+// TradingView free widgets only support certain exchanges.
+// LSE, OMXSTO, OMXCOP, TSE, and Euronext are BLOCKED (exchange licensing).
+// Solution: use the US OTC/ADR listing for each affected stock.
+// These trade on OTC Markets and are freely embeddable.
+//
+// Stock           | Native          | US OTC/ADR used here
+// ----------------|-----------------|---------------------
+// Xylem           | NYSE:XYL        | NYSE:XYL (direct)
+// Halma           | LSE:HLMA        | OTC:HALMY
+// Hexagon AB      | OMXSTO:HEXA_B   | OTC:HXGBY
+// Cochlear        | ASX:COH         | ASX:COH (direct)
+// Vestas          | OMXCOP:VWS      | OTC:VWDRY
+// Fujifilm        | TSE:4901        | OTC:FUJIY
+// Hannon Armstrong| NYSE:HASI       | NYSE:HASI (direct)
+// Makita          | TSE:6586        | OTC:MKTAY
+// Brookfield Ren. | NYSE:BEP        | NYSE:BEP (direct)
+// Schneider Elec. | EURONEXT:SU     | OTC:SBGSY
+
 const STOCKS = [
-  { tv: 'NYSE:XYL',       name: 'Xylem Inc',            sector: 'Water Technology',     exchange: 'NYSE',     yahoo: 'XYL' },
-  { tv: 'LSE:HLMA',       name: 'Halma plc',            sector: 'Safety & Environment', exchange: 'LSE',      yahoo: 'HLMA.L' },
-  { tv: 'OMXSTO:HEXA_B',  name: 'Hexagon AB',           sector: 'Digital Reality Tech', exchange: 'OMX',      yahoo: 'HEXA-B.ST' },
-  { tv: 'ASX:COH',        name: 'Cochlear',             sector: 'Medical Devices',      exchange: 'ASX',      yahoo: 'COH.AX' },
-  { tv: 'OMXCOP:VWS',     name: 'Vestas Wind Systems',  sector: 'Renewable Energy',     exchange: 'CPH',      yahoo: 'VWS.CO' },
-  { tv: 'TSE:4901',       name: 'Fujifilm Holdings',    sector: 'Imaging & Healthcare', exchange: 'Tokyo',    yahoo: '4901.T' },
-  { tv: 'NYSE:HASI',      name: 'Hannon Armstrong',     sector: 'Sustainable Finance',  exchange: 'NYSE',     yahoo: 'HASI' },
-  { tv: 'TSE:6586',       name: 'Makita Corporation',   sector: 'Power Tools',          exchange: 'Tokyo',    yahoo: '6586.T' },
-  { tv: 'NYSE:BEP',       name: 'Brookfield Renewable', sector: 'Renewable Energy',     exchange: 'NYSE',     yahoo: 'BEP' },
-  { tv: 'EURONEXT:SU',    name: 'Schneider Electric',   sector: 'Energy Management',    exchange: 'Euronext', yahoo: 'SU.PA' },
+  { tv: 'NYSE:XYL',   name: 'Xylem Inc',            sector: 'Water Technology',     exchange: 'NYSE',    otc: false, yahoo: 'XYL' },
+  { tv: 'OTC:HALMY',  name: 'Halma plc',             sector: 'Safety & Environment', exchange: 'OTC·ADR', otc: true,  yahoo: 'HALMY' },
+  { tv: 'OTC:HXGBY',  name: 'Hexagon AB',            sector: 'Digital Reality Tech', exchange: 'OTC·ADR', otc: true,  yahoo: 'HXGBY' },
+  { tv: 'ASX:COH',    name: 'Cochlear',              sector: 'Medical Devices',      exchange: 'ASX',     otc: false, yahoo: 'COH.AX' },
+  { tv: 'OTC:VWDRY',  name: 'Vestas Wind Systems',   sector: 'Renewable Energy',     exchange: 'OTC·ADR', otc: true,  yahoo: 'VWDRY' },
+  { tv: 'OTC:FUJIY',  name: 'Fujifilm Holdings',     sector: 'Imaging & Healthcare', exchange: 'OTC·ADR', otc: true,  yahoo: 'FUJIY' },
+  { tv: 'NYSE:HASI',  name: 'Hannon Armstrong',      sector: 'Sustainable Finance',  exchange: 'NYSE',    otc: false, yahoo: 'HASI' },
+  { tv: 'OTC:MKTAY',  name: 'Makita Corporation',    sector: 'Power Tools',          exchange: 'OTC·ADR', otc: true,  yahoo: 'MKTAY' },
+  { tv: 'NYSE:BEP',   name: 'Brookfield Renewable',  sector: 'Renewable Energy',     exchange: 'NYSE',    otc: false, yahoo: 'BEP' },
+  { tv: 'OTC:SBGSY',  name: 'Schneider Electric',    sector: 'Energy Management',    exchange: 'OTC·ADR', otc: true,  yahoo: 'SBGSY' },
 ];
 
 const CURRENCIES = [
@@ -196,15 +208,12 @@ async function fetchRates() {
     const res = await fetch('https://api.frankfurter.app/latest?from=AUD&to=USD,EUR,DKK,SEK,GBP,JPY,CAD');
     const data = await res.json();
     if (!data.rates) return;
-
     let prev = {};
     try {
-      // Go back a few days to avoid weekend gaps
       const d = new Date(); d.setDate(d.getDate() - 3);
       const r2 = await fetch(`https://api.frankfurter.app/${d.toISOString().split('T')[0]}?from=AUD&to=USD,EUR,DKK,SEK,GBP,JPY,CAD`);
       prev = (await r2.json()).rates || {};
     } catch(e) {}
-
     CURRENCIES.forEach(c => {
       const rate = data.rates[c.code]; if (!rate) return;
       document.getElementById(`rate-${c.code}`).textContent = rate.toFixed(c.code==='JPY'?2:4);
@@ -218,14 +227,9 @@ async function fetchRates() {
 }
 
 // ── TRADINGVIEW CHARTS ───────────────────────────────────────────────────────
-// Uses the official script-based widget (NOT the old iframe URL approach)
-// The script tag content is the JSON config — TradingView reads it on load
-
 function renderTVWidget(containerId, symbol, interval) {
   const wrap = document.getElementById(containerId);
   if (!wrap) return;
-
-  // Completely replace contents so old widget is removed
   wrap.innerHTML = '';
 
   const outer = document.createElement('div');
@@ -241,7 +245,6 @@ function renderTVWidget(containerId, symbol, interval) {
   script.type = 'text/javascript';
   script.async = true;
   script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
-  // TradingView reads the script's textContent as the config JSON
   script.textContent = JSON.stringify({
     autosize: true,
     symbol: symbol,
@@ -275,11 +278,9 @@ async function fetchNews(stock, i) {
   const el = document.getElementById(`news-${i}`);
   const rssUrl = `https://feeds.finance.yahoo.com/rss/2.0/headline?s=${stock.yahoo}&region=US&lang=en-US`;
   const yahooLink = `https://finance.yahoo.com/quote/${stock.yahoo}/news/`;
-
   try {
     const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=6`);
     const data = await res.json();
-
     if (data.status === 'ok' && data.items?.length) {
       el.innerHTML = data.items.map(item => {
         const d = new Date(item.pubDate);
@@ -289,15 +290,13 @@ async function fetchNews(stock, i) {
           <div class="news-title"><a href="${item.link}" target="_blank" rel="noopener">${item.title}</a></div>
         </div>`;
       }).join('');
-    } else {
-      throw new Error('no items');
-    }
+    } else { throw new Error('no items'); }
   } catch(e) {
     el.innerHTML = `<div class="news-msg">Feed unavailable &nbsp;·&nbsp; <a href="${yahooLink}" target="_blank" rel="noopener" style="color:var(--accent)">View on Yahoo Finance ↗</a></div>`;
   }
 }
 
-// ── BUILD & INIT ─────────────────────────────────────────────────────────────
+// ── BUILD CARDS ───────────────────────────────────────────────────────────────
 function buildStockCards() {
   document.getElementById('stocks-grid').innerHTML = STOCKS.map((s, i) => `
     <div class="stock-card">
@@ -307,7 +306,10 @@ function buildStockCards() {
           <div class="stock-name">${s.name}</div>
           <div class="stock-sector">${s.sector}</div>
         </div>
-        <div class="stock-exchange">${s.exchange}</div>
+        <div class="stock-badge-row">
+          <div class="stock-exchange">${s.exchange}</div>
+          ${s.otc ? `<div class="stock-note">ADR / OTC</div>` : ''}
+        </div>
       </div>
       <div class="chart-controls">
         ${Object.keys(TV_INTERVALS).map((tf,ti) =>
@@ -325,14 +327,12 @@ function buildStockCards() {
     </div>`).join('');
 }
 
+// ── INIT ─────────────────────────────────────────────────────────────────────
 function init() {
   buildCurrencyCards();
   fetchRates();
   setInterval(fetchRates, 60000);
-
   buildStockCards();
-
-  // Stagger chart and news loads to avoid hammering external servers
   STOCKS.forEach((s, i) => {
     setTimeout(() => renderTVWidget(`chart-${i}`, s.tv, '1D'), i * 350);
     setTimeout(() => fetchNews(s, i), i * 600 + 1000);
