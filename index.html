@@ -29,346 +29,91 @@
   }
 
   header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(13,15,14,0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 56px;
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,15,14,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border); padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between; height: 56px;
   }
 
-  .logo {
-    font-family: 'Fraunces', serif;
-    font-size: 1.3rem;
-    font-weight: 300;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-  }
+  .logo { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 300; color: var(--accent); letter-spacing: -0.02em; }
+  .logo span { font-style: italic; color: var(--text-muted); font-size: 0.9rem; }
+  .header-right { display: flex; align-items: center; gap: 1.5rem; }
 
-  .logo span {
-    font-style: italic;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-  }
+  .live-dot { display: flex; align-items: center; gap: 0.4rem; color: var(--text-muted); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .live-dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  .live-dot {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--text-muted);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .live-dot::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
-  nav {
-    display: flex;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  nav button {
-    background: transparent;
-    border: none;
-    color: var(--text-muted);
-    padding: 6px 14px;
-    cursor: pointer;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    transition: all 0.2s;
-    border-right: 1px solid var(--border);
-  }
-
+  nav { display: flex; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  nav button { background: transparent; border: none; color: var(--text-muted); padding: 6px 14px; cursor: pointer; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em; transition: all 0.2s; border-right: 1px solid var(--border); }
   nav button:last-child { border-right: none; }
   nav button:hover, nav button.active { background: var(--accent); color: var(--bg); }
 
-  main {
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
+  main { max-width: 1600px; margin: 0 auto; padding: 2rem; }
 
-  .section-label {
-    font-family: 'Fraunces', serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent2);
-    margin-bottom: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
+  .section-label { font-family: 'Fraunces', serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* ── CURRENCY ── */
-  .currency-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 3rem;
-  }
-
-  .currency-card {
-    background: var(--surface);
-    padding: 1.2rem;
-    transition: background 0.2s;
-  }
-
+  .currency-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 3rem; }
+  .currency-card { background: var(--surface); padding: 1.2rem; transition: background 0.2s; }
   .currency-card:hover { background: var(--surface2); }
-
-  .currency-pair {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-  }
-
-  .currency-rate {
-    font-family: 'Fraunces', serif;
-    font-size: 1.6rem;
-    font-weight: 300;
-    line-height: 1;
-    margin-bottom: 0.4rem;
-  }
-
+  .currency-pair { font-size: 10px; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; }
+  .currency-rate { font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 300; line-height: 1; margin-bottom: 0.4rem; }
   .currency-change { font-size: 11px; }
-  .up { color: var(--accent); }
-  .down { color: var(--red); }
+  .up { color: var(--accent); } .down { color: var(--red); }
+  .shimmer { color: var(--text-muted); animation: blink 1.4s infinite; }
+  @keyframes blink { 0%,100%{opacity:0.4} 50%{opacity:1} }
 
-  .shimmer {
-    color: var(--text-muted);
-    animation: blink 1.4s infinite;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
-  }
-
-  /* ── STOCKS ── */
-  .stocks-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(660px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-
+  .stocks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(640px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
   @media (max-width: 700px) { .stocks-grid { grid-template-columns: 1fr; } }
 
-  .stock-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-    animation: fadeUp 0.4s ease both;
-  }
+  .stock-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; animation: fadeUp 0.4s ease both; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  .stock-card:nth-child(1){animation-delay:.05s} .stock-card:nth-child(2){animation-delay:.1s}
+  .stock-card:nth-child(3){animation-delay:.15s} .stock-card:nth-child(4){animation-delay:.2s}
+  .stock-card:nth-child(5){animation-delay:.25s} .stock-card:nth-child(6){animation-delay:.3s}
+  .stock-card:nth-child(7){animation-delay:.35s} .stock-card:nth-child(8){animation-delay:.4s}
+  .stock-card:nth-child(9){animation-delay:.45s} .stock-card:nth-child(10){animation-delay:.5s}
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  .stock-header { padding: 1rem 1.2rem 0.8rem; display: flex; align-items: flex-start; justify-content: space-between; border-bottom: 1px solid var(--border); }
+  .stock-ticker { font-size: 11px; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.2rem; }
+  .stock-name { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 300; line-height: 1.2; }
+  .stock-sector { font-size: 10px; color: var(--text-muted); margin-top: 0.2rem; letter-spacing: 0.06em; }
+  .stock-exchange { font-size: 10px; color: var(--text-muted); border: 1px solid var(--border); padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
 
-  .stock-card:nth-child(1)  { animation-delay: 0.05s; }
-  .stock-card:nth-child(2)  { animation-delay: 0.10s; }
-  .stock-card:nth-child(3)  { animation-delay: 0.15s; }
-  .stock-card:nth-child(4)  { animation-delay: 0.20s; }
-  .stock-card:nth-child(5)  { animation-delay: 0.25s; }
-  .stock-card:nth-child(6)  { animation-delay: 0.30s; }
-  .stock-card:nth-child(7)  { animation-delay: 0.35s; }
-  .stock-card:nth-child(8)  { animation-delay: 0.40s; }
-  .stock-card:nth-child(9)  { animation-delay: 0.45s; }
-  .stock-card:nth-child(10) { animation-delay: 0.50s; }
-
-  .stock-header {
-    padding: 1rem 1.2rem 0.8rem;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .stock-ticker {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    margin-bottom: 0.2rem;
-    text-transform: uppercase;
-  }
-
-  .stock-name {
-    font-family: 'Fraunces', serif;
-    font-size: 1.05rem;
-    font-weight: 300;
-    line-height: 1.2;
-  }
-
-  .stock-sector {
-    font-size: 10px;
-    color: var(--text-muted);
-    margin-top: 0.2rem;
-    letter-spacing: 0.06em;
-  }
-
-  .stock-exchange {
-    font-size: 10px;
-    color: var(--text-muted);
-    letter-spacing: 0.08em;
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-  }
-
-  .chart-controls {
-    display: flex;
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface2);
-    gap: 2px;
-  }
-
-  .tf-btn {
-    background: transparent;
-    border: none;
-    color: var(--text-muted);
-    padding: 3px 10px;
-    cursor: pointer;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    border-radius: 3px;
-    transition: all 0.15s;
-  }
-
+  .chart-controls { display: flex; padding: 0.45rem 0.8rem; border-bottom: 1px solid var(--border); background: var(--surface2); gap: 2px; }
+  .tf-btn { background: transparent; border: none; color: var(--text-muted); padding: 3px 9px; cursor: pointer; font-family: 'DM Mono', monospace; font-size: 11px; border-radius: 3px; transition: all 0.15s; }
   .tf-btn:hover { color: var(--text); background: var(--border); }
   .tf-btn.active { color: var(--bg); background: var(--accent); }
 
-  .chart-container {
-    height: 300px;
-    background: var(--surface);
-    position: relative;
-  }
-
-  .chart-container iframe {
+  /* Chart container — must have explicit height for TradingView autosize to work */
+  .chart-wrap {
+    height: 320px;
     width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
+    position: relative;
+    background: #141716;
   }
-
-  /* ── NEWS ── */
-  .news-section {
-    border-top: 1px solid var(--border);
-    padding: 0.8rem 1.2rem;
-    background: var(--bg);
+  .chart-wrap .tradingview-widget-container,
+  .chart-wrap .tradingview-widget-container > div:first-child {
+    height: 100% !important;
+    width: 100% !important;
   }
+  /* Hide the TV copyright bar to save space */
+  .chart-wrap .tradingview-widget-copyright { display: none !important; }
 
-  .news-label {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-bottom: 0.7rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .news-yahoo-link {
-    color: var(--accent2);
-    text-decoration: none;
-    font-size: 10px;
-    letter-spacing: 0.06em;
-  }
-
-  .news-yahoo-link:hover { color: var(--accent); }
-
-  .news-items {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    max-height: 150px;
-    overflow-y: auto;
-  }
-
+  .news-section { border-top: 1px solid var(--border); padding: 0.8rem 1.2rem; background: var(--bg); }
+  .news-label { font-size: 10px; letter-spacing: 0.12em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.7rem; display: flex; align-items: center; justify-content: space-between; }
+  .news-ext-link { color: var(--accent2); text-decoration: none; font-size: 10px; }
+  .news-ext-link:hover { color: var(--accent); }
+  .news-items { display: flex; flex-direction: column; gap: 0.5rem; max-height: 145px; overflow-y: auto; }
   .news-items::-webkit-scrollbar { width: 3px; }
   .news-items::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-  .news-item {
-    display: flex;
-    gap: 0.8rem;
-    align-items: flex-start;
-  }
-
-  .news-date {
-    font-size: 10px;
-    color: var(--text-muted);
-    white-space: nowrap;
-    padding-top: 1px;
-    min-width: 58px;
-  }
-
-  .news-title a {
-    font-size: 11px;
-    line-height: 1.45;
-    color: var(--text);
-    text-decoration: none;
-    transition: color 0.15s;
-  }
-
+  .news-item { display: flex; gap: 0.8rem; align-items: flex-start; }
+  .news-date { font-size: 10px; color: var(--text-muted); white-space: nowrap; padding-top: 1px; min-width: 55px; }
+  .news-title a { font-size: 11px; line-height: 1.45; color: var(--text); text-decoration: none; transition: color 0.15s; }
   .news-title a:hover { color: var(--accent); }
+  .news-msg { font-size: 11px; color: var(--text-muted); font-style: italic; }
 
-  .news-empty {
-    font-size: 11px;
-    color: var(--text-muted);
-    font-style: italic;
-  }
-
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 1.5rem 2rem;
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-  }
+  footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; text-align: center; color: var(--text-muted); font-size: 11px; letter-spacing: 0.06em; }
 </style>
 </head>
 <body>
@@ -390,7 +135,6 @@
     <div class="section-label">AUD Foreign Exchange</div>
     <div class="currency-grid" id="currency-grid"></div>
   </div>
-
   <div id="stocks-section">
     <div class="section-label">Holdings</div>
     <div class="stocks-grid" id="stocks-grid"></div>
@@ -398,90 +142,23 @@
 </main>
 
 <footer>
-  Charts via TradingView &nbsp;·&nbsp; Rates via frankfurter.app &nbsp;·&nbsp; News via Yahoo Finance &nbsp;·&nbsp; Rates refresh every 60s
+  Charts via TradingView &nbsp;·&nbsp; Rates via frankfurter.app &nbsp;·&nbsp; News via Yahoo Finance RSS &nbsp;·&nbsp; Rates auto-refresh every 60s
 </footer>
 
 <script>
-// ─── STOCK CONFIG ───────────────────────────────────────────────────────────
-// TradingView symbols verified: use EXCHANGE:TICKER format exactly as TV expects
-
+// ── CONFIG ──────────────────────────────────────────────────────────────────
 const STOCKS = [
-  {
-    tv: 'NYSE:XYL',
-    name: 'Xylem Inc',
-    sector: 'Water Technology',
-    exchange: 'NYSE',
-    yahooTicker: 'XYL',
-  },
-  {
-    tv: 'LSE:HLMA',
-    name: 'Halma plc',
-    sector: 'Safety & Environment',
-    exchange: 'LSE',
-    yahooTicker: 'HLMA.L',
-  },
-  {
-    tv: 'OMXSTO:HEXAB',
-    name: 'Hexagon AB',
-    sector: 'Digital Reality Tech',
-    exchange: 'OMX Stockholm',
-    yahooTicker: 'HEXA-B.ST',
-  },
-  {
-    tv: 'ASX:COH',
-    name: 'Cochlear',
-    sector: 'Medical Devices',
-    exchange: 'ASX',
-    yahooTicker: 'COH.AX',
-  },
-  {
-    tv: 'OMXCOP:VWS',
-    name: 'Vestas Wind Systems',
-    sector: 'Renewable Energy',
-    exchange: 'Copenhagen',
-    yahooTicker: 'VWS.CO',
-  },
-  {
-    tv: 'TSE:4901',
-    name: 'Fujifilm Holdings',
-    sector: 'Imaging & Healthcare',
-    exchange: 'Tokyo',
-    yahooTicker: '4901.T',
-  },
-  {
-    tv: 'NYSE:HASI',
-    name: 'Hannon Armstrong',
-    sector: 'Sustainable Finance',
-    exchange: 'NYSE',
-    yahooTicker: 'HASI',
-  },
-  {
-    tv: 'TSE:6586',
-    name: 'Makita Corporation',
-    sector: 'Power Tools',
-    exchange: 'Tokyo',
-    yahooTicker: '6586.T',
-  },
-  {
-    tv: 'NYSE:BEP',
-    name: 'Brookfield Renewable',
-    sector: 'Renewable Energy',
-    exchange: 'NYSE',
-    yahooTicker: 'BEP',
-  },
-  {
-    tv: 'EURONEXT:SU',
-    name: 'Schneider Electric SE',
-    sector: 'Energy Management',
-    exchange: 'Euronext Paris',
-    yahooTicker: 'SU.PA',
-  },
+  { tv: 'NYSE:XYL',       name: 'Xylem Inc',            sector: 'Water Technology',     exchange: 'NYSE',     yahoo: 'XYL' },
+  { tv: 'LSE:HLMA',       name: 'Halma plc',            sector: 'Safety & Environment', exchange: 'LSE',      yahoo: 'HLMA.L' },
+  { tv: 'OMXSTO:HEXA_B',  name: 'Hexagon AB',           sector: 'Digital Reality Tech', exchange: 'OMX',      yahoo: 'HEXA-B.ST' },
+  { tv: 'ASX:COH',        name: 'Cochlear',             sector: 'Medical Devices',      exchange: 'ASX',      yahoo: 'COH.AX' },
+  { tv: 'OMXCOP:VWS',     name: 'Vestas Wind Systems',  sector: 'Renewable Energy',     exchange: 'CPH',      yahoo: 'VWS.CO' },
+  { tv: 'TSE:4901',       name: 'Fujifilm Holdings',    sector: 'Imaging & Healthcare', exchange: 'Tokyo',    yahoo: '4901.T' },
+  { tv: 'NYSE:HASI',      name: 'Hannon Armstrong',     sector: 'Sustainable Finance',  exchange: 'NYSE',     yahoo: 'HASI' },
+  { tv: 'TSE:6586',       name: 'Makita Corporation',   sector: 'Power Tools',          exchange: 'Tokyo',    yahoo: '6586.T' },
+  { tv: 'NYSE:BEP',       name: 'Brookfield Renewable', sector: 'Renewable Energy',     exchange: 'NYSE',     yahoo: 'BEP' },
+  { tv: 'EURONEXT:SU',    name: 'Schneider Electric',   sector: 'Energy Management',    exchange: 'Euronext', yahoo: 'SU.PA' },
 ];
-
-// TradingView interval codes
-const INTERVALS = {
-  '1D': 'D', '1W': 'W', '1M': 'M', '3M': '3M', '1Y': '12M', '5Y': '60M'
-};
 
 const CURRENCIES = [
   { code: 'USD', name: 'US Dollar' },
@@ -493,19 +170,17 @@ const CURRENCIES = [
   { code: 'CAD', name: 'Canadian Dollar' },
 ];
 
-// ─── NAV ────────────────────────────────────────────────────────────────────
+const TV_INTERVALS = { '1D':'D', '1W':'W', '1M':'M', '3M':'3M', '1Y':'12M', '5Y':'60M' };
 
+// ── NAV ─────────────────────────────────────────────────────────────────────
 function showSection(view, btn) {
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  const fx = document.getElementById('fx-section');
-  const st = document.getElementById('stocks-section');
-  fx.style.display = (view === 'all' || view === 'fx') ? 'block' : 'none';
-  st.style.display = (view === 'all' || view === 'stocks') ? 'block' : 'none';
+  document.getElementById('fx-section').style.display     = (view==='all'||view==='fx')     ? '' : 'none';
+  document.getElementById('stocks-section').style.display = (view==='all'||view==='stocks') ? '' : 'none';
 }
 
-// ─── CURRENCY ───────────────────────────────────────────────────────────────
-
+// ── CURRENCY ─────────────────────────────────────────────────────────────────
 function buildCurrencyCards() {
   document.getElementById('currency-grid').innerHTML = CURRENCIES.map(c => `
     <div class="currency-card">
@@ -513,154 +188,142 @@ function buildCurrencyCards() {
       <div class="currency-rate" id="rate-${c.code}"><span class="shimmer">···</span></div>
       <div class="currency-change" id="chg-${c.code}"></div>
       <div style="font-size:10px;color:var(--text-muted);margin-top:0.4rem">${c.name}</div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 async function fetchRates() {
   try {
-    const [today, yday] = await Promise.all([
-      fetch('https://api.frankfurter.app/latest?from=AUD&to=USD,EUR,DKK,SEK,GBP,JPY,CAD').then(r => r.json()),
-      fetch(`https://api.frankfurter.app/latest?from=AUD&to=USD,EUR,DKK,SEK,GBP,JPY,CAD`).then(r => r.json())
-        .catch(() => ({ rates: {} }))
-    ]);
+    const res = await fetch('https://api.frankfurter.app/latest?from=AUD&to=USD,EUR,DKK,SEK,GBP,JPY,CAD');
+    const data = await res.json();
+    if (!data.rates) return;
 
-    // Also fetch previous day for change %
-    const prevDate = new Date();
-    prevDate.setDate(prevDate.getDate() - 1);
-    const prevStr = prevDate.toISOString().split('T')[0];
     let prev = {};
     try {
-      const r = await fetch(`https://api.frankfurter.app/${prevStr}?from=AUD&to=USD,EUR,DKK,SEK,GBP,JPY,CAD`);
-      const d = await r.json();
-      prev = d.rates || {};
+      // Go back a few days to avoid weekend gaps
+      const d = new Date(); d.setDate(d.getDate() - 3);
+      const r2 = await fetch(`https://api.frankfurter.app/${d.toISOString().split('T')[0]}?from=AUD&to=USD,EUR,DKK,SEK,GBP,JPY,CAD`);
+      prev = (await r2.json()).rates || {};
     } catch(e) {}
 
     CURRENCIES.forEach(c => {
-      const rate = today.rates?.[c.code];
-      if (!rate) return;
-      const dp = c.code === 'JPY' ? 2 : 4;
-      document.getElementById(`rate-${c.code}`).textContent = rate.toFixed(dp);
-      const prevRate = prev[c.code];
-      if (prevRate) {
-        const pct = ((rate - prevRate) / prevRate * 100);
-        const cls = pct >= 0 ? 'up' : 'down';
-        const arrow = pct >= 0 ? '▲' : '▼';
+      const rate = data.rates[c.code]; if (!rate) return;
+      document.getElementById(`rate-${c.code}`).textContent = rate.toFixed(c.code==='JPY'?2:4);
+      if (prev[c.code]) {
+        const pct = (rate - prev[c.code]) / prev[c.code] * 100;
         document.getElementById(`chg-${c.code}`).innerHTML =
-          `<span class="${cls}">${arrow} ${Math.abs(pct).toFixed(3)}%</span>`;
+          `<span class="${pct>=0?'up':'down'}">${pct>=0?'▲':'▼'} ${Math.abs(pct).toFixed(3)}%</span>`;
       }
     });
+  } catch(e) { console.warn('FX error', e); }
+}
+
+// ── TRADINGVIEW CHARTS ───────────────────────────────────────────────────────
+// Uses the official script-based widget (NOT the old iframe URL approach)
+// The script tag content is the JSON config — TradingView reads it on load
+
+function renderTVWidget(containerId, symbol, interval) {
+  const wrap = document.getElementById(containerId);
+  if (!wrap) return;
+
+  // Completely replace contents so old widget is removed
+  wrap.innerHTML = '';
+
+  const outer = document.createElement('div');
+  outer.className = 'tradingview-widget-container';
+  outer.style.cssText = 'height:100%;width:100%';
+
+  const inner = document.createElement('div');
+  inner.className = 'tradingview-widget-container__widget';
+  inner.style.cssText = 'height:100%;width:100%';
+  outer.appendChild(inner);
+
+  const script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.async = true;
+  script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+  // TradingView reads the script's textContent as the config JSON
+  script.textContent = JSON.stringify({
+    autosize: true,
+    symbol: symbol,
+    interval: TV_INTERVALS[interval] || 'D',
+    timezone: 'Australia/Perth',
+    theme: 'dark',
+    style: '1',
+    locale: 'en',
+    backgroundColor: '#141716',
+    gridColor: 'rgba(42,46,44,0.8)',
+    withdateranges: true,
+    hide_side_toolbar: true,
+    allow_symbol_change: false,
+    save_image: false,
+    hide_volume: false,
+    support_host: 'https://www.tradingview.com'
+  });
+
+  outer.appendChild(script);
+  wrap.appendChild(outer);
+}
+
+function changeInterval(idx, interval, btn) {
+  document.querySelectorAll('.stock-card')[idx].querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTVWidget(`chart-${idx}`, STOCKS[idx].tv, interval);
+}
+
+// ── NEWS ─────────────────────────────────────────────────────────────────────
+async function fetchNews(stock, i) {
+  const el = document.getElementById(`news-${i}`);
+  const rssUrl = `https://feeds.finance.yahoo.com/rss/2.0/headline?s=${stock.yahoo}&region=US&lang=en-US`;
+  const yahooLink = `https://finance.yahoo.com/quote/${stock.yahoo}/news/`;
+
+  try {
+    const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=6`);
+    const data = await res.json();
+
+    if (data.status === 'ok' && data.items?.length) {
+      el.innerHTML = data.items.map(item => {
+        const d = new Date(item.pubDate);
+        const ds = isNaN(d.getTime()) ? '' : d.toLocaleDateString('en-AU',{day:'2-digit',month:'short'});
+        return `<div class="news-item">
+          <div class="news-date">${ds}</div>
+          <div class="news-title"><a href="${item.link}" target="_blank" rel="noopener">${item.title}</a></div>
+        </div>`;
+      }).join('');
+    } else {
+      throw new Error('no items');
+    }
   } catch(e) {
-    console.warn('FX fetch error', e);
+    el.innerHTML = `<div class="news-msg">Feed unavailable &nbsp;·&nbsp; <a href="${yahooLink}" target="_blank" rel="noopener" style="color:var(--accent)">View on Yahoo Finance ↗</a></div>`;
   }
 }
 
-// ─── CHARTS ─────────────────────────────────────────────────────────────────
-
-function tvIframeSrc(symbol, interval) {
-  const iv = INTERVALS[interval] || 'D';
-  return `https://s.tradingview.com/widgetembed/?` +
-    `symbol=${encodeURIComponent(symbol)}` +
-    `&interval=${iv}` +
-    `&theme=dark` +
-    `&style=1` +
-    `&locale=en` +
-    `&timezone=Australia%2FPerth` +
-    `&hide_side_toolbar=1` +
-    `&allow_symbol_change=0` +
-    `&save_image=0` +
-    `&withdateranges=1`;
-}
-
-function changeInterval(cardIndex, interval, btn) {
-  // Update button states
-  const card = document.querySelectorAll('.stock-card')[cardIndex];
-  card.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  // Update iframe src (no full re-render = no flicker)
-  const iframe = card.querySelector('iframe');
-  iframe.src = tvIframeSrc(STOCKS[cardIndex].tv, interval);
-}
-
-// ─── NEWS ────────────────────────────────────────────────────────────────────
-// Strategy: use multiple CORS-friendly RSS proxy options with fallbacks
-
-const PROXIES = [
-  url => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}&count=6`,
-  url => `https://feedparser.netlify.app/.netlify/functions/parse?url=${encodeURIComponent(url)}`,
-];
-
-async function fetchNewsForStock(stock, index) {
-  const el = document.getElementById(`news-${index}`);
-  const yahooRSS = `https://feeds.finance.yahoo.com/rss/2.0/headline?s=${stock.yahooTicker}&region=US&lang=en-US`;
-  const yahooURL = `https://finance.yahoo.com/quote/${stock.yahooTicker}/news/`;
-
-  // Try rss2json first
-  try {
-    const res = await fetch(PROXIES[0](yahooRSS));
-    const data = await res.json();
-    if (data.status === 'ok' && data.items?.length > 0) {
-      renderNews(el, data.items.map(i => ({ title: i.title, link: i.link, date: i.pubDate })));
-      return;
-    }
-  } catch(e) {}
-
-  // Fallback: link directly to Yahoo Finance news page
-  el.innerHTML = `
-    <div class="news-empty">
-      Live feed unavailable in browser &nbsp;·&nbsp;
-      <a href="${yahooURL}" target="_blank" rel="noopener" style="color:var(--accent)">
-        View ${stock.yahooTicker} news on Yahoo Finance ↗
-      </a>
-    </div>`;
-}
-
-function renderNews(el, items) {
-  el.innerHTML = items.map(item => {
-    const d = new Date(item.date);
-    const dateStr = isNaN(d) ? '' : d.toLocaleDateString('en-AU', { day: '2-digit', month: 'short' });
-    return `
-      <div class="news-item">
-        <div class="news-date">${dateStr}</div>
-        <div class="news-title"><a href="${item.link}" target="_blank" rel="noopener">${item.title}</a></div>
-      </div>`;
-  }).join('');
-}
-
-// ─── BUILD CARDS ─────────────────────────────────────────────────────────────
-
+// ── BUILD & INIT ─────────────────────────────────────────────────────────────
 function buildStockCards() {
-  const grid = document.getElementById('stocks-grid');
-  grid.innerHTML = STOCKS.map((s, i) => `
+  document.getElementById('stocks-grid').innerHTML = STOCKS.map((s, i) => `
     <div class="stock-card">
       <div class="stock-header">
         <div>
-          <div class="stock-ticker">${s.tv.split(':')[1]}</div>
+          <div class="stock-ticker">${s.tv}</div>
           <div class="stock-name">${s.name}</div>
           <div class="stock-sector">${s.sector}</div>
         </div>
         <div class="stock-exchange">${s.exchange}</div>
       </div>
       <div class="chart-controls">
-        ${Object.keys(INTERVALS).map((tf, ti) =>
+        ${Object.keys(TV_INTERVALS).map((tf,ti) =>
           `<button class="tf-btn${ti===0?' active':''}" onclick="changeInterval(${i},'${tf}',this)">${tf}</button>`
         ).join('')}
       </div>
-      <div class="chart-container">
-        <iframe src="${tvIframeSrc(s.tv, '1D')}" allowtransparency="true" frameborder="0" scrolling="no"></iframe>
-      </div>
+      <div class="chart-wrap" id="chart-${i}"></div>
       <div class="news-section">
         <div class="news-label">
           Latest News
-          <a class="news-yahoo-link" href="https://finance.yahoo.com/quote/${s.yahooTicker}/news/" target="_blank" rel="noopener">Yahoo Finance ↗</a>
+          <a class="news-ext-link" href="https://finance.yahoo.com/quote/${s.yahoo}/news/" target="_blank" rel="noopener">Yahoo Finance ↗</a>
         </div>
         <div class="news-items" id="news-${i}"><span class="shimmer">Loading···</span></div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
-
-// ─── INIT ────────────────────────────────────────────────────────────────────
 
 function init() {
   buildCurrencyCards();
@@ -668,8 +331,12 @@ function init() {
   setInterval(fetchRates, 60000);
 
   buildStockCards();
-  // Stagger news requests to avoid rate limiting
-  STOCKS.forEach((s, i) => setTimeout(() => fetchNewsForStock(s, i), i * 600));
+
+  // Stagger chart and news loads to avoid hammering external servers
+  STOCKS.forEach((s, i) => {
+    setTimeout(() => renderTVWidget(`chart-${i}`, s.tv, '1D'), i * 350);
+    setTimeout(() => fetchNews(s, i), i * 600 + 1000);
+  });
 }
 
 init();
